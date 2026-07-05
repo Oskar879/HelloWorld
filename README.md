@@ -4,3 +4,4 @@ Webpage which collect user parameter information, including:
 - device/device model
 - keyboard language
 - time when user visited this site (optional)
+- website
