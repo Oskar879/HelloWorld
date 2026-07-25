@@ -1,31 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Tracker</title>
-</head>
-<body>
-
-<h1>Welcome</h1>
-
 <script>
-async function sendVisitorData() {
-    const data = {
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        language: navigator.language,
-        userAgent: navigator.userAgent
-    };
-
-    await fetch("https://sunimi.rf.gd/collect.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
-}
-
-sendVisitorData();
+fetch("https://testi123.infinityfree.io/collect.php", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+    })
+});
 </script>
-
-</body>
-</html>
