@@ -2,7 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 
-$conn = new mysqli("sqlXXX.epizy.com", "if0_42344312", "dnjUpkouhFS", "if0_42344312_visitors_db");
+$conn = new mysqli("sqlXXX.epizy.com", "if0_42344312", "salkhsa776ss", "if0_42344312_visitors_db");
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
