@@ -1,26 +1,35 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
 
-$conn = new mysqli("sqlXXX.epizy.com", "if0_42344312", "salkhsa776ss", "if0_42344312_visitors_db");
+$conn = new mysqli("sql108.infinityfree.com", "if0_42344312", "salkhsa776ss", "if0_42344312_visitors_db");
 
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("DB error");
 }
 
-$data = json_decode(file_get_contents("php://input"), true);
+// DEBUG (näyttää mitä frontend lähettää)
+$raw = file_get_contents("php://input");
+$data = json_decode($raw, true);
+
+// fallback jos JSON ei toimi
+if (!$data) {
+    $data = $_POST;
+}
 
 $ip = $_SERVER['REMOTE_ADDR'];
+$user_agent = $_SERVER['HTTP_USER_AGENT'];
 
-$timezone = $data['timezone'] ?? '';
-$language = $data['language'] ?? '';
-$userAgent = $data['userAgent'] ?? '';
-$visitTime = date("Y-m-d H:i:s");
+$timezone = $data['timezone'] ?? 'missing';
+$language = $data['language'] ?? 'missing';
+// DEBUG vastaus
+// echo json_encode($data); exit;
 
-$stmt = $conn->prepare("INSERT INTO visits (ip, timezone, language, user_agent, visit_time) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("sssss", $ip, $timezone, $language, $userAgent, $visitTime);
-
+$stmt = $conn->prepare("INSERT INTO visits (ip, timezone, language, user_agent) VALUES (?, ?, ?, ?)");
+$stmt->bind_param("ssss", $ip, $timezone, $language, $user_agent);
 $stmt->execute();
 
-echo "OK";
+echo json_encode([
+    "status" => "ok",
+    "received" => $data
+]);
 ?>
