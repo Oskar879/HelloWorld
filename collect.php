@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/json");
 
-$conn = new mysqli("sql108.infinityfree.com", "if0_42344312", "salkhsa776ss", "if0_42344312_visitors_db");
+$conn = new mysqli("sql108.infinityfree.com", "if0_42344312", "salkhsa776ss", "if0_42344312_hwdb");
 
 if ($conn->connect_error) {
     die("DB error");

@@ -1,11 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tracker</title>
+</head>
+<body>
+
+<h1>     Mites menee Marvellous? Meikällä aika hyvin.. heheh</h1>
+
 <script>
-fetch("https://testi123.infinityfree.io/collect.php", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
-    })
-});
+async function sendVisitorData() {
+    const data = {
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        language: navigator.language,
+        userAgent: navigator.userAgent
+    };
+
+    await fetch("https://helloworld.infinityfree.io/collect.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+}
+
+sendVisitorData();
 </script>
+
+</body>
+</html>
